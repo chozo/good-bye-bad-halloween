@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>OGP</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body { width: 1200px; height: 630px; overflow: hidden; position: relative; background: #0b0616; color: #fff; font-family: system-ui, "Hiragino Sans", "Hiragino Kaku Gothic ProN", sans-serif; }
+  .bg { position: absolute; inset: -40px; background: url(./scene.png) center 30% / cover; filter: blur(14px) brightness(0.45) saturate(1.2); }
+  .shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(11,6,22,0.92) 0%, rgba(11,6,22,0.75) 52%, rgba(11,6,22,0.1) 100%); }
+  .tape { position: absolute; left: -40px; right: -40px; bottom: 26px; height: 30px; transform: rotate(-2deg); background: repeating-linear-gradient(45deg, #ffd21f 0 22px, #1a1a1a 22px 44px); box-shadow: 0 4px 12px rgba(0,0,0,0.5); }
+  .phone { position: absolute; right: 64px; top: 22px; width: 318px; height: 566px; border-radius: 34px; border: 8px solid #20123a; background: url(./scene.png) center 0 / cover; box-shadow: 0 18px 50px rgba(0,0,0,0.6), 0 0 0 2px #5a3a9a; transform: rotate(3deg); }
+  .text { position: absolute; left: 64px; top: 50px; width: 720px; }
+  .kicker { font-size: 26px; color: #ffd27a; letter-spacing: 0.12em; font-weight: 700; margin: 0 0 6px; }
+  h1 { margin: 0; font-size: 64px; line-height: 1.02; font-weight: 900; color: #ff8a1f; text-shadow: 0 6px 0 #5b1d00; transform: rotate(-2deg); transform-origin: left; letter-spacing: 0.01em; }
+  h1 span { display: block; font-size: 80px; white-space: nowrap; }
+  .catch { margin: 30px 0 0; font-size: 44px; font-weight: 900; line-height: 1.2; }
+  .rules { display: flex; gap: 14px; margin-top: 32px; }
+  .rule { display: flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.08); border-radius: 16px; padding: 6px 14px 6px 6px; }
+  .rule.hit { outline: 3px solid #ff8a1f; }
+  .rule canvas { width: 66px; height: 88px; }
+  .rule b { display: block; font-size: 22px; white-space: nowrap; }
+  .rule i { display: inline-block; margin-top: 4px; font-style: normal; font-weight: 900; font-size: 20px; padding: 3px 12px; border-radius: 99px; background: #3b6fd6; white-space: nowrap; }
+  .rule.hit i { background: #ff8a1f; color: #2a1000; }
+  .url { position: absolute; left: 64px; bottom: 74px; font-size: 22px; color: #cfc6e8; letter-spacing: 0.04em; }
+</style>
+</head>
+<body>
+<div class="bg"></div>
+<div class="shade"></div>
+<div class="phone"></div>
+<div class="tape"></div>
+<div class="text">
+  <p class="kicker">非公式・渋谷ハロウィン自警団</p>
+  <h1 lang="en">GOOD BYE<span>BAD HALLOWEEN</span></h1>
+  <p class="catch">ハロウィン目的で渋谷に来ないで！</p>
+  <div class="rules">
+    <div class="rule hit"><canvas id="c-costume"></canvas><div><b>仮装した人</b><i>タップで成敗</i></div></div>
+    <div class="rule"><canvas id="c-ghost"></canvas><div><b>本物のおばけ</b><i>見逃す</i></div></div>
+    <div class="rule"><canvas id="c-normal"></canvas><div><b>普通の人</b><i>見逃す</i></div></div>
+  </div>
+</div>
+<p class="url" id="url" hidden></p>
+<script type="module">
+  import { drawHuman, monsterLook } from '../../src/draw.js';
+  // 公開URLは ?url= で渡す（slug が決まってから）
+  const url = new URLSearchParams(location.search).get('url');
+  if (url) { const u = document.getElementById('url'); u.textContent = url; u.hidden = false; }
+  // タイトル画面の見本と同じ描き方
+  const looks = {
+    costume: { skin: '#f1c9a5', hair: '#222', top: '#5d7f9b', pants: '#33475e', shoes: '#e53935' },
+    normal: { skin: '#f1c9a5', hair: '#222', top: '#2c3e66', pants: '#2c3e66', shoes: '#1a1a1a' },
+  };
+  function sample(id, kind, variant) {
+    const c = document.getElementById(id);
+    const g = c.getContext('2d');
+    c.width = 66 * 2; c.height = 88 * 2;
+    g.setTransform(2, 0, 0, 2, 0, 0);
+    const monster = kind === 'ghost';
+    const e = { kind, variant, monster, phase: 1, seed: 1, hemY: -26, eyeGlow: 1, props: kind === 'costume' ? { priceTag: true } : {}, look: monster ? monsterLook(variant) : looks[kind] };
+    g.translate(33, 86);
+    g.scale(0.6, 0.6);
+    drawHuman(g, e);
+  }
+  sample('c-costume', 'costume', 'vampire');
+  sample('c-ghost', 'ghost', 'vampire');
+  sample('c-normal', 'normal', 'salaryman');
+  const img = new Image();
+  img.onload = img.onerror = () => { document.body.dataset.ready = '1'; };
+  img.src = './scene.png';
+</script>
+</body>
+</html>

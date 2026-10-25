@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>キャラクター一覧（仮装・普通の人）</title>
+<style>
+  body { margin: 0; padding: 24px; background: #0b0616; color: #fff; font-family: system-ui, "Hiragino Sans", sans-serif; width: 1100px; }
+  h1 { font-size: 26px; margin: 0 0 6px; }
+  .lead { color: #bbb; font-size: 14px; margin: 0 0 18px; line-height: 1.6; }
+  section { margin: 0 0 22px; padding: 18px; background: #160c2a; border-radius: 14px; }
+  h2 { font-size: 20px; margin: 0 0 4px; }
+  h2 small { font-size: 13px; color: #aaa; font-weight: 400; margin-left: 8px; }
+  .note { font-size: 13px; color: #ffd27a; margin: 0 0 12px; line-height: 1.6; }
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .card { background: #22163d; border-radius: 10px; padding: 10px; }
+  .card.normal { outline: 2px solid #4f8cff55; }
+  .card.costume { outline: 2px solid #ff8a1f66; }
+  .card.ghost { outline: 2px solid #b46bff66; }
+  .card h3 { margin: 0 0 6px; font-size: 16px; }
+  .card h3 .tag { font-size: 11px; padding: 2px 6px; border-radius: 99px; margin-right: 6px; vertical-align: 2px; }
+  .normal .tag { background: #4f8cff; }
+  .costume .tag { background: #ff8a1f; color: #2a1000; }
+  .ghost .tag { background: #b46bff; }
+  canvas { display: block; width: 100%; border-radius: 6px; }
+  .cap { font-size: 12px; color: #ccc; display: flex; justify-content: space-between; margin: 3px 2px 6px; }
+  ul { margin: 0; padding-left: 16px; font-size: 12.5px; line-height: 1.55; color: #e8e8f0; }
+  li.warn { color: #ff9aa8; }
+</style>
+</head>
+<body>
+<h1>キャラクター一覧：仮装・普通の人（参考：本物のお化け）</h1>
+<p class="lead">
+  大＝規制線の少し手前の見え方（縮小）。右の3つは「約20m」「出現直後の約34m」をゲームと同じ大きさ（スマホの画面幅いっぱいに近い比率）で描いたものと、約20mの輪郭だけを抜き出した「輪郭」。<br>
+  箇条書きは今の実装での見分けの手がかり。<span style="color:#ff9aa8">赤字</span>は仮装と普通の人の見分けを紛らわしくしている点。
+</p>
+<div id="root"></div>
+<script type="module" src="./catalog.js"></script>
+</body>
+</html>

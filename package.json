@@ -1,0 +1,20 @@
+{
+  "name": "good-bye-bad-halloween",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "dev": "node tools/serve.mjs",
+    "check": "node --check src/game.js && node --check src/draw.js && node --check src/audio.js && node --check src/config.js && node --check src/scene.js && node --check src/replay.js",
+    "e2e": "node tools/e2e.mjs",
+    "catalog": "node tools/catalog.mjs",
+    "ogp": "node tools/ogp/make-ogp.mjs",
+    "build": "node tools/build-dist.mjs",
+    "deploy": "npm run build && wrangler deploy"
+  },
+  "devDependencies": {
+    "playwright-core": "^1.48.0",
+    "wrangler": "^4.152.0"
+  }
+}

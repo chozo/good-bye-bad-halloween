@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <title>GOOD BYE BAD HALLOWEEN</title>
+  <meta name="description" content="ハロウィン目的で渋谷に来ないで！仮装した人だけを成敗し、本物のおばけと普通の人は見逃す縦型ミニゲーム。">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="GOOD BYE BAD HALLOWEEN">
+  <meta property="og:title" content="GOOD BYE BAD HALLOWEEN">
+  <meta property="og:description" content="ハロウィン目的で渋谷に来ないで！仮装した人だけを成敗し、本物のおばけと普通の人は見逃す縦型ミニゲーム。">
+  <meta property="og:url" content="https://game.chozo.net/good-bye-bad-halloween/">
+  <meta property="og:image" content="https://game.chozo.net/good-bye-bad-halloween/ogp.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="渋谷駅前のスクランブル交差点で、仮装した人をハリセンで成敗するゲーム画面と、タイトル「GOOD BYE BAD HALLOWEEN」">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="./src/style.css">
+</head>
+<body>
+  <main id="stage">
+    <canvas id="game" aria-label="ゲーム画面"></canvas>
+
+    <div id="hud" hidden>
+      <div class="hud-score"><span class="label">成敗</span><span id="score">0</span><span class="unit">人</span></div>
+      <div id="level">Lv1</div>
+      <div id="lives" aria-label="ミス"><i></i><i></i><i></i></div>
+    </div>
+
+    <button id="mute" class="mute" aria-label="音のオンオフ">🔊</button>
+
+    <section id="start" class="panel">
+      <p class="kicker">非公式・渋谷ハロウィン自警団</p>
+      <h1 lang="en">GOOD BYE<br><span>BAD HALLOWEEN</span></h1>
+      <p class="motto">ハロウィン目的で<br>渋谷に来ないで！</p>
+      <div class="samples">
+        <figure class="hit"><canvas id="sample-costume"></canvas><figcaption><b>仮装した人</b><span class="act">タップで成敗</span></figcaption></figure>
+        <figure class="pass"><canvas id="sample-ghost"></canvas><figcaption><b>本物のおばけ</b><span class="act">見逃す</span></figcaption></figure>
+        <figure class="pass"><canvas id="sample-normal"></canvas><figcaption><b>普通の人</b><span class="act">見逃す</span></figcaption></figure>
+      </div>
+      <p class="hint">見分け方：<b>影</b>があるのは人間。<br><b>本物のおばけ</b>は影がない</p>
+      <p class="rule">おばけや普通の人を叩くとミス。<br>仮装を道玄坂へ通してもミス。ミス3回で終わり</p>
+      <button id="btn-start" class="btn">出動する</button>
+    </section>
+
+    <section id="result" class="panel" hidden>
+      <p class="kicker">本日の取り締まり結果</p>
+      <p class="res-score"><span id="res-score">0</span><small>人 成敗</small></p>
+      <p class="res-title-label">あなたの称号</p>
+      <p id="res-title" class="res-title"></p>
+      <p id="res-next" class="res-next"></p>
+      <p class="res-misses-label">ミスをタップするとリプレイを見返せます</p>
+      <ul id="res-misses" class="res-misses"></ul>
+      <p id="res-best" class="res-best"></p>
+      <button id="btn-retry" class="btn">もう一度出動</button>
+      <button id="btn-title" class="btn sub">タイトルへ</button>
+    </section>
+  </main>
+  <script type="module" src="./src/game.js"></script>
+</body>
+</html>

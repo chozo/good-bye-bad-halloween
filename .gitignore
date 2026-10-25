@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.DS_Store
+shots/
+*.log
+.wrangler/
+tools/ogp/scene.png
