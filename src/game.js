@@ -4,7 +4,7 @@ import {
   drawBubble, GHOST_LIKE, OBVIOUS, LOOKALIKE, monsterLook,
 } from './draw.js';
 import { project, makeScene, drawScreens, drawLine } from './scene.js';
-import { initAudio, play, setMuted, isMuted, startBgm, stopBgm, setBgmLevel, duckBgm } from './audio.js';
+import { initAudio, play, setMuted, isMuted, startBgm, stopBgm, setBgmLevel, duckBgm, promoAudio } from './audio.js';
 import { explainMiss } from './replay.js';
 
 const W = C.width;
@@ -332,7 +332,7 @@ function tapAt(x, y) {
     const lv = Math.min(C.levels.length - 1, Math.floor(S.score / C.levelEvery));
     if (lv > S.level) {
       S.level = lv;
-      addText(`Lv${lv + 1}  人が増えてきた！`, W / 2, H * 0.42, '#7ff7ff', 30, 1.6);
+      // 画面の文字では知らせない（人が多い場面で邪魔になるため）。左上の Lv 表示と音で伝える
       play('levelup');
       setBgmLevel(lv);
       emit('levelup', { level: lv });
@@ -985,9 +985,12 @@ let last = performance.now();
 function frame(now) {
   const dt = Math.min(0.05, (now - last) / 1000);
   last = now;
-  clock += dt;
-  if (!manual) update(dt * timeScale);
-  render();
+  // 手動のとき（確認・告知動画の撮影）は step() で進めて描く
+  if (!manual) {
+    clock += dt;
+    update(dt * timeScale);
+    render();
+  }
   requestAnimationFrame(frame);
 }
 
@@ -1070,10 +1073,18 @@ window.__game = {
   setManual(v) {
     manual = v;
   },
+  manual(v) {
+    manual = v;
+  },
   step(dt = 1 / 60, n = 1) {
-    for (let i = 0; i < n; i++) update(dt);
+    for (let i = 0; i < n; i++) {
+      clock += dt;
+      update(dt);
+    }
     render();
   },
+  // 告知動画の撮影用（tools/promo）：効果音・BGM の記録と書き出し
+  audio: promoAudio,
   setTimeScale(v) {
     timeScale = v;
   },

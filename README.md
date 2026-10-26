@@ -52,7 +52,7 @@
 
 ## 難易度
 
-成敗した人数が `levelEvery`（6人）増えるごとにレベルが上がり、次が変わります（全20段階）。
+成敗した人数が `levelEvery`（6人）増えるごとにレベルが上がり、次が変わります（全20段階）。レベルが上がったことは、左上の「Lv」表示と効果音で知らせます（画面の中央には文字を出しません。人が多い場面で邪魔になるため）。
 
 - 歩く速さ、出現の間隔、同時に歩く人数
 - 幽霊っぽい仮装（シーツ・白装束・落ち武者）の割合
@@ -82,6 +82,7 @@ npm run e2e      # ヘッドレス Chrome で動作確認（スクリーンシ�
 npm run build    # 公開用ファイルを dist/good-bye-bad-halloween/ に書き出す
 npm run deploy   # build して Cloudflare Workers に公開する
 npm run ogp      # OGP 画像 public/ogp.png（1200×630）を作り直す（dev サーバー起動中に実行。画像には公開URLが入る）
+npm run promo    # 告知動画を ../video/ に書き出す（下の「告知動画」）
 npm run catalog  # 仮装・普通の人・本物のお化けの一覧画像を docs/patterns/ に書き出す（dev サーバー起動中に実行）
 ```
 
@@ -110,11 +111,22 @@ npm run catalog  # 仮装・普通の人・本物のお化けの一覧画像を 
 | `wrangler.jsonc` | Cloudflare Workers の設定 |
 | `tools/e2e.mjs` | 自動の動作確認 |
 | `tools/ogp/` | OGP 画像を作る（固定の乱数でゲーム画面を撮り、`ogp.html` で文字と見本を重ねる） |
+| `tools/promo/` | 告知動画の撮影・書き出し（台本は `scenario.js`） |
 | `tools/catalog/`, `tools/catalog.mjs` | キャラクター一覧の画像（`docs/patterns/`）を作る |
 
 ## OGP 画像
 
 `public/ogp.png` は、実際のゲーム画面（成敗の瞬間）にタイトル・キャッチコピー・遊び方（仮装は成敗、本物のおばけと普通の人は見逃す）を重ねたものです。左下に公開URL（game.chozo.net/good-bye-bad-halloween/）を入れています。`index.html` には `og:image` などのメタタグを絶対URLで入れています。
+
+## 告知動画
+
+`npm run promo` で、縦型 1080×1920・約30秒の告知動画を作ります。実際のゲームをヘッドレス Chrome で1コマずつ撮り、字幕を重ねて MP4 にします。BGM はゲームの合成 BGM（`src/audio.js`）を、効果音といっしょに同じ時計で書き出しています（音量は -14 LUFS に調整）。
+
+- 出力: `../video/good-bye-bad-halloween-promo.mp4`、表紙 `-promo-cover.jpg`、2秒おきの一覧 `-promo-sheet.jpg`（動画はリポジトリに含めない。途中ファイルは `../video/work/`）
+- 構成（`tools/promo/scenario.js`）: 仮装を次々に成敗（スロー）→ タイトル → Lv1・Lv7・Lv15 でそれぞれ1〜2人を成敗（等速）→ 本物のおばけ（ドラキュラ）を成敗してしまいミス、リプレイで答え合わせ → エンドカード。1回のプレイを始め直さずに撮るので、BGM は最後まで途切れない
+- `PROMO_EVERY=15 npm run promo`: 15コマおきに撮って構成だけ確認する（`-promo-preview.jpg`）
+- `PROMO_ENCODE_ONLY=1 npm run promo`: 撮り直さずに音と MP4 だけ作り直す
+- 撮影用の入口: `window.__game` の `manual` / `step` / `drainEvents` / `audio`（`capture` / `drain` / `resync` / `render`）。撮影中は音を鳴らさず呼び出しを記録し、書き出し時に OfflineAudioContext で同じ音を鳴らす
 
 ## 看板について
 
