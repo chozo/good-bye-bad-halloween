@@ -1,4 +1,4 @@
-# GOOD BYE BAD HALLOWEEN
+# GOODBYE BAD HALLOWEEN
 
 「ハロウィン目的で渋谷に来ないで！」
 
@@ -6,7 +6,7 @@
 
 人は奥（約34m先）から小さく現れ、近づくほど大きく見えます（3Dカメラの透視投影。Three.js は使わず Canvas 2D で描画）。見分けやすさのため、人物は実際の遠近より1.5倍大きく描いています（`personScale`）。重なりを減らすため、規制線のところでは4本のレーンに分かれて歩きます。プレイヤーは道玄坂の入口に立ち、渋谷駅の方を向いています。背景は渋谷駅（ハチ公口）、高架を走る山手線、駅の上の高層タワー、ハチ公広場（かぼちゃの帽子のハチ公像）、交差点に面したビルのビジョン、スクランブルの斜め横断歩道です。
 
-タイトルは「GOOD BYE BAD HALLOWEEN」、slug は `goodbye-bad-halloween` です。公開URLは https://game.chozo.net/goodbye-bad-halloween/ です。
+タイトルは「GOODBYE BAD HALLOWEEN」、slug は `goodbye-bad-halloween` です。公開URLは https://game.chozo.net/goodbye-bad-halloween/ です。
 
 タイトル画面では、仮装した人＝タップで成敗、本物のおばけ・普通の人＝見逃す、を見本の絵とバッジで示しています。
 
@@ -149,6 +149,6 @@ npm run catalog  # 仮装・普通の人・本物のお化けの一覧画像を 
 
 [MIT License](./LICENSE)（Copyright (c) 2026 chozo）です。改変・再配布・商用利用ができます。利用するときは、著作権表示とライセンス文を残してください。
 
-「GOOD BYE BAD HALLOWEEN」「chozo」の名前やロゴを、作者が関わっているように見える形で使わないでください。
+「GOODBYE BAD HALLOWEEN」「chozo」の名前やロゴを、作者が関わっているように見える形で使わないでください。
 
 画像・音はすべてコードで描画・合成しており、外部の素材は使っていません。

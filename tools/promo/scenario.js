@@ -1,4 +1,4 @@
-// 告知動画の台本（GOOD BYE BAD HALLOWEEN）。npm run promo で ../video/goodbye-bad-halloween-promo.mp4 を作る
+// 告知動画の台本（GOODBYE BAD HALLOWEEN）。npm run promo で ../video/goodbye-bad-halloween-promo.mp4 を作る
 // 使える操作はスキルの references/scenario-api.md。BGM はゲームの合成 BGM（src/audio.js）をそのまま書き出す
 
 export const config = {
@@ -13,7 +13,7 @@ export const config = {
   music: false, // 合成リズムは使わず、ゲームの BGM を使う
 };
 
-const TITLE = 'GOOD BYE\nBAD HALLOWEEN';
+const TITLE = 'GOODBYE\nBAD HALLOWEEN';
 
 // 仮装した人を1人叩く（指の下にいるのがその人だと確かめてから叩く）
 async function bustOne(p, { zMin = 5.6, zMax = 24 } = {}) {
