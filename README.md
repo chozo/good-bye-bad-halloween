@@ -6,7 +6,7 @@
 
 人は奥（約34m先）から小さく現れ、近づくほど大きく見えます（3Dカメラの透視投影。Three.js は使わず Canvas 2D で描画）。見分けやすさのため、人物は実際の遠近より1.5倍大きく描いています（`personScale`）。重なりを減らすため、規制線のところでは4本のレーンに分かれて歩きます。プレイヤーは道玄坂の入口に立ち、渋谷駅の方を向いています。背景は渋谷駅（ハチ公口）、高架を走る山手線、駅の上の高層タワー、ハチ公広場（かぼちゃの帽子のハチ公像）、交差点に面したビルのビジョン、スクランブルの斜め横断歩道です。
 
-タイトルは「GOOD BYE BAD HALLOWEEN」、slug は `good-bye-bad-halloween` です。公開URLは https://game.chozo.net/good-bye-bad-halloween/ です。
+タイトルは「GOOD BYE BAD HALLOWEEN」、slug は `goodbye-bad-halloween` です。公開URLは https://game.chozo.net/goodbye-bad-halloween/ です。
 
 タイトル画面では、仮装した人＝タップで成敗、本物のおばけ・普通の人＝見逃す、を見本の絵とバッジで示しています。
 
@@ -79,7 +79,7 @@ npm install
 npm run dev      # http://localhost:5173/
 npm run check    # 構文チェック
 npm run e2e      # ヘッドレス Chrome で動作確認（スクリーンショットは shots/）
-npm run build    # 公開用ファイルを dist/good-bye-bad-halloween/ に書き出す
+npm run build    # 公開用ファイルを dist/goodbye-bad-halloween/ に書き出す
 npm run deploy   # build して Cloudflare Workers に公開する
 npm run ogp      # OGP 画像 public/ogp.png（1200×630）を作り直す（dev サーバー起動中に実行。画像には公開URLが入る）
 npm run promo    # 告知動画を ../video/ に書き出す（下の「告知動画」）
@@ -107,7 +107,7 @@ npm run catalog  # 仮装・普通の人・本物のお化けの一覧画像を 
 | `public/favicon.svg` | ファビコン |
 | `public/ogp.png` | SNS 共有用の OGP 画像（1200×630） |
 | `tools/serve.mjs` | 開発用サーバー |
-| `tools/build-dist.mjs` | 公開用ファイルを `dist/good-bye-bad-halloween/` にコピーする |
+| `tools/build-dist.mjs` | 公開用ファイルを `dist/goodbye-bad-halloween/` にコピーする |
 | `wrangler.jsonc` | Cloudflare Workers の設定 |
 | `tools/e2e.mjs` | 自動の動作確認 |
 | `tools/ogp/` | OGP 画像を作る（固定の乱数でゲーム画面を撮り、`ogp.html` で文字と見本を重ねる） |
@@ -116,13 +116,13 @@ npm run catalog  # 仮装・普通の人・本物のお化けの一覧画像を 
 
 ## OGP 画像
 
-`public/ogp.png` は、実際のゲーム画面（成敗の瞬間）にタイトル・キャッチコピー・遊び方（仮装は成敗、本物のおばけと普通の人は見逃す）を重ねたものです。左下に公開URL（game.chozo.net/good-bye-bad-halloween/）を入れています。`index.html` には `og:image` などのメタタグを絶対URLで入れています。
+`public/ogp.png` は、実際のゲーム画面（成敗の瞬間）にタイトル・キャッチコピー・遊び方（仮装は成敗、本物のおばけと普通の人は見逃す）を重ねたものです。左下に公開URL（game.chozo.net/goodbye-bad-halloween/）を入れています。`index.html` には `og:image` などのメタタグを絶対URLで入れています。
 
 ## 告知動画
 
 `npm run promo` で、縦型 1080×1920・約30秒の告知動画を作ります。実際のゲームをヘッドレス Chrome で1コマずつ撮り、字幕を重ねて MP4 にします。BGM はゲームの合成 BGM（`src/audio.js`）を、効果音といっしょに同じ時計で書き出しています（音量は -14 LUFS に調整）。
 
-- 出力: `../video/good-bye-bad-halloween-promo.mp4`、表紙 `-promo-cover.jpg`、2秒おきの一覧 `-promo-sheet.jpg`（動画はリポジトリに含めない。途中ファイルは `../video/work/`）
+- 出力: `../video/goodbye-bad-halloween-promo.mp4`、表紙 `-promo-cover.jpg`、2秒おきの一覧 `-promo-sheet.jpg`（動画はリポジトリに含めない。途中ファイルは `../video/work/`）
 - 構成（`tools/promo/scenario.js`）: 仮装を次々に成敗（スロー）→ タイトル → Lv1・Lv7・Lv15 でそれぞれ1〜2人を成敗（等速）→ 本物のおばけ（ドラキュラ）を成敗してしまいミス、リプレイで答え合わせ → エンドカード。1回のプレイを始め直さずに撮るので、BGM は最後まで途切れない
 - `PROMO_EVERY=15 npm run promo`: 15コマおきに撮って構成だけ確認する（`-promo-preview.jpg`）
 - `PROMO_ENCODE_ONLY=1 npm run promo`: 撮り直さずに音と MP4 だけ作り直す
@@ -134,10 +134,11 @@ npm run catalog  # 仮装・普通の人・本物のお化けの一覧画像を 
 
 ## 公開
 
-- GitHub: https://github.com/chozo/good-bye-bad-halloween
-- Cloudflare Workers + Static Assets。Worker 名 `good-bye-bad-halloween`、ルートは `game.chozo.net/good-bye-bad-halloween` と `game.chozo.net/good-bye-bad-halloween/*`（`wrangler.jsonc`）。workers.dev は使わない
-- ビルド工程はなく、`npm run build` は `index.html`・`src/`・`public/` の中身を `dist/good-bye-bad-halloween/` にコピーするだけ
-- 公開後に `npm run e2e https://game.chozo.net/good-bye-bad-halloween/` で通し確認する
+- GitHub: https://github.com/chozo/goodbye-bad-halloween
+- Cloudflare Workers + Static Assets。Worker 名 `goodbye-bad-halloween`、ルートは `game.chozo.net/goodbye-bad-halloween` と `game.chozo.net/goodbye-bad-halloween/*`（`wrangler.jsonc`）。workers.dev は使わない
+- ビルド工程はなく、`npm run build` は `index.html`・`src/`・`public/` の中身を `dist/goodbye-bad-halloween/` にコピーするだけ
+- 公開後に `npm run e2e https://game.chozo.net/goodbye-bad-halloween/` で通し確認する
+- 最初は slug `good-bye-bad-halloween` で公開していた（2026-10-26 に変更）。旧URL `game.chozo.net/good-bye-bad-halloween/...` は、同じ名前の別の Worker（このリポジトリには含めない）が新URLへ 301 で転送する。旧リポジトリ名の URL は GitHub が転送する
 - スマホ実機（音・描画速度）での確認はまだ
 
 ## 前提について

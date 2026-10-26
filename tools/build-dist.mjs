@@ -1,10 +1,10 @@
-// 公開用ファイルを dist/good-bye-bad-halloween/ に書き出す（ビルド工程はなく、コピーするだけ）
+// 公開用ファイルを dist/goodbye-bad-halloween/ に書き出す（ビルド工程はなく、コピーするだけ）
 // index.html と src/ をそのまま、public/ の中身を直下に置く
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const SLUG = 'good-bye-bad-halloween';
+const SLUG = 'goodbye-bad-halloween';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const out = path.join(root, 'dist', SLUG);
 

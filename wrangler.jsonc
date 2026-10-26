@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
-  "name": "good-bye-bad-halloween",
+  "name": "goodbye-bad-halloween",
   "compatibility_date": "2026-10-26",
   "workers_dev": false,
   "preview_urls": false,
@@ -10,7 +10,7 @@
     "not_found_handling": "none"
   },
   "routes": [
-    {"pattern": "game.chozo.net/good-bye-bad-halloween", "zone_name": "chozo.net"},
-    {"pattern": "game.chozo.net/good-bye-bad-halloween/*", "zone_name": "chozo.net"}
+    {"pattern": "game.chozo.net/goodbye-bad-halloween", "zone_name": "chozo.net"},
+    {"pattern": "game.chozo.net/goodbye-bad-halloween/*", "zone_name": "chozo.net"}
   ]
 }

@@ -1,9 +1,9 @@
-// 告知動画の台本（GOOD BYE BAD HALLOWEEN）。npm run promo で ../video/good-bye-bad-halloween-promo.mp4 を作る
+// 告知動画の台本（GOOD BYE BAD HALLOWEEN）。npm run promo で ../video/goodbye-bad-halloween-promo.mp4 を作る
 // 使える操作はスキルの references/scenario-api.md。BGM はゲームの合成 BGM（src/audio.js）をそのまま書き出す
 
 export const config = {
-  slug: 'good-bye-bad-halloween',
-  url: 'game.chozo.net/good-bye-bad-halloween/',
+  slug: 'goodbye-bad-halloween',
+  url: 'game.chozo.net/goodbye-bad-halloween/',
   orientation: 'portrait',
   game: { width: 390, height: 693 }, // ゲームは 9:16
   serveDir: '.',

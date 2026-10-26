@@ -1,6 +1,6 @@
 // ブラウザでの動作確認（playwright-core + インストール済み Chrome、ヘッドレス）
 // 使い方: npm run e2e   （スクリーンショットは shots/ に保存）
-//         npm run e2e https://game.chozo.net/good-bye-bad-halloween/   （公開URLを確認する）
+//         npm run e2e https://game.chozo.net/goodbye-bad-halloween/   （公開URLを確認する）
 import { chromium } from 'playwright-core';
 import { spawn } from 'node:child_process';
 import fs from 'node:fs';

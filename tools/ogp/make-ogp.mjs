@@ -41,7 +41,7 @@ try {
 
   // ---- 2. 文字とキャラクターを重ねる
   const og = await browser.newPage({ viewport: { width: 1200, height: 630 }, deviceScaleFactor: 1 });
-  const url = process.env.OGP_URL || 'game.chozo.net/good-bye-bad-halloween/'; // 画像に載せる公開URL
+  const url = process.env.OGP_URL || 'game.chozo.net/goodbye-bad-halloween/'; // 画像に載せる公開URL
   await og.goto(new URL('tools/ogp/ogp.html', BASE).href + (url ? `?url=${encodeURIComponent(url)}` : ''));
   await og.waitForFunction(() => document.body.dataset.ready === '1');
   await og.screenshot({ path: path.join(root, 'public/ogp.png') });
